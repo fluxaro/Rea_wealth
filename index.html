@@ -461,6 +461,92 @@
     .nav-links { gap: 1.25rem; }
     .hero-left { padding: 3.5rem 2rem 3rem; }
   }
+/* Hamburger menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-toggle .hamburger::before {
+  transform: translateY(-6px);
+}
+
+.nav-toggle .hamburger::after {
+  transform: translateY(4px);
+}
+
+.nav-toggle.active .hamburger {
+  background: transparent;
+}
+.nav-toggle.active .hamburger::before {
+  transform: rotate(45deg) translate(3px, 3px);
+}
+.nav-toggle.active .hamburger::after {
+  transform: rotate(-45deg) translate(3px, -3px);
+}
+
+/* Mobile nav */
+@media (max-width: 899px) {
+  .nav-toggle {
+    display: flex;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--rule);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  /* Adjust the nav links for mobile */
+  .nav-links a {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Desktop: hide hamburger and show nav links as row */
+@media (min-width: 900px) {
+  .nav-toggle {
+    display: none;
+  }
+  .nav-links {
+    display: flex !important; /* override the mobile none */
+    flex-direction: row;
+    position: static;
+    width: auto;
+    background: transparent;
+    backdrop-filter: none;
+    border-top: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -468,7 +554,10 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Rachel Wealth</a>
-  <div class="nav-links">
+  <button class="nav-toggle" aria-label="Open menu">
+    <span class="hamburger"></span>
+  </button>
+  <div class="nav-links" id="navLinks">
     <a href="#approach">Approach</a>
     <a href="#thinking">Thinking</a>
     <a href="#proof">Experience</a>
@@ -788,6 +877,23 @@
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth' });
       }
+    });
+  });
+  
+  // Hamburger menu
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('#navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navLinks.classList.remove('active');
     });
   });
 </script>

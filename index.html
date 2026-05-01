@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachel Wealth — Customer Operations Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1814;
+    --ink-light: #3D3A34;
+    --muted: #8C8880;
+    --accent: #C4874A;
+    --accent-light: #E8D5BE;
+    --rule: #D8D0C4;
+    --card-bg: #FEFCF8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 60px;
+  }
+  .hero-left {
+    background: var(--ink);
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 3.5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: 'RW';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: -4rem; right: -3rem;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.0;
+    color: #FAF8F4;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(250,248,244,0.55);
+    margin-bottom: 3rem;
+  }
+  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #FAF8F4;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #B37840; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: rgba(250,248,244,0.7);
+    border: 1px solid rgba(250,248,244,0.25);
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-ghost:hover { border-color: rgba(250,248,244,0.6); color: #FAF8F4; transform: translateY(-1px); }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 3.5rem;
+  }
+  .hero-statement {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+  }
+  .hero-statement em { font-style: italic; color: var(--accent); }
+  .hero-descriptor {
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    max-width: 38ch;
+    border-left: 2px solid var(--accent-light);
+    padding-left: 1.25rem;
+  }
+
+  /* SECTION HELPERS */
+  .section { padding: 7rem 4rem; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .divider {
+    width: 48px; height: 1px;
+    background: var(--accent);
+    margin: 2rem 0;
+  }
+
+  /* PHILOSOPHY / QUOTE */
+  .philosophy-section {
+    background: var(--ink);
+    padding: 6rem 4rem;
+    text-align: center;
+  }
+  .philosophy-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #FAF8F4;
+    max-width: 52rem;
+    margin: 0 auto 1.5rem;
+    line-height: 1.4;
+  }
+  .philosophy-attr {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* SHAPED BACKGROUND */
+  .bg-cream { background: var(--cream); }
+  .bg-card { background: var(--card-bg); }
+
+  /* HOW I THINK */
+  .think-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 3rem;
+  }
+  .think-card {
+    background: var(--warm-white);
+    padding: 2rem 1.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .think-card:hover { background: var(--card-bg); }
+  .think-card.open { background: var(--cream); }
+  .think-card-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem;
+  }
+  .think-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 400;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .think-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .think-toggle {
+    width: 20px; height: 20px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .think-card.open .think-toggle {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    transform: rotate(45deg);
+  }
+  .think-body {
+    display: none;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+  }
+  .think-card.open .think-body { display: block; }
+
+  /* TOOLS */
+  .tools-section { background: var(--cream); }
+  .tools-category { margin-bottom: 2.5rem; }
+  .tools-cat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .tool-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tool-pill {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    background: var(--warm-white);
+    transition: all 0.2s;
+  }
+  .tool-pill:hover { background: var(--ink); color: #FAF8F4; border-color: var(--ink); }
+
+  /* PROOF POINTS */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .proof-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    padding: 2rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .proof-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,24,20,0.08); }
+  .proof-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+  .proof-org {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .proof-text {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .proof-stat {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 1.25rem;
+  }
+  .proof-stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: block;
+    margin-top: 0.1rem;
+  }
+
+  /* CLOSING */
+  .closing-section {
+    background: var(--cream);
+    padding: 7rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .closing-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .closing-heading em { font-style: italic; color: var(--accent); }
+  .contact-detail { margin-bottom: 1rem; }
+  .contact-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  .contact-value {
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: rgba(250,248,244,0.5);
+  }
+  .footer-note {
+    font-size: 0.78rem;
+    color: rgba(250,248,244,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  /* APPROACH SECTION */
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+  }
+  .approach-item { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
+  .approach-item:last-child { border-bottom: none; }
+  .approach-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--accent-light);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .approach-head {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .approach-body { font-size: 0.9rem; color: var(--ink-light); line-height: 1.75; }
+
+  /* WHAT I BRING */
+  .bring-list { margin-top: 2.5rem; }
+  .bring-item {
+    display: flex; align-items: flex-start; gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .bring-item:first-child { border-top: 1px solid var(--rule); }
+  .bring-marker {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    line-height: 1.7;
+  }
+  .bring-text { font-size: 0.95rem; color: var(--ink-light); line-height: 1.7; }
+
+  /* SCROLL ANIMATE */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { min-height: 60vh; }
+    .hero-right { padding: 3.5rem 2rem; }
+    .closing-section { grid-template-columns: 1fr; gap: 3rem; }
+    .approach-grid { grid-template-columns: 1fr; gap: 0; }
+    .section { padding: 5rem 2rem; }
+    .philosophy-section { padding: 5rem 2rem; }
+    .tools-section.section { padding: 5rem 2rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero-left { padding: 3.5rem 2rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Rachel Wealth</a>
+  <div class="nav-links">
+    <a href="#approach">Approach</a>
+    <a href="#thinking">Thinking</a>
+    <a href="#proof">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Customer Operations Leadership</div>
+    <h1 class="hero-name">Rachel<br>Wealth</h1>
+    <p class="hero-title">I have done the work. Now I lead it.</p>
+    <div class="hero-btns">
+      <a href="#proof" class="btn-primary">View Experience</a>
+      <a href="#approach" class="btn-ghost">How I Lead</a>
+      <a href="#contact" class="btn-ghost">Contact</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-statement">
+      Good service is never just about <em>speed.</em><br>
+      It is about making people feel guided, respected, and taken care of.
+    </p>
+    <p class="hero-descriptor">
+      I have answered the calls, handled escalations, managed insurance customers under pressure, and coached teams through volume. That experience is how I lead.
+    </p>
+  </div>
+</section>
+
+<!-- PHILOSOPHY QUOTE -->
+<section class="philosophy-section">
+  <blockquote class="philosophy-quote">
+    "The best service does not make customers feel processed. It makes them feel protected."
+  </blockquote>
+  <p class="philosophy-attr">— Rachel Wealth</p>
+</section>
+
+<!-- HOW I LEAD -->
+<section class="section bg-cream" id="approach">
+  <div class="section-label fade-up">Leadership Approach</div>
+  <h2 class="section-heading fade-up">How I lead</h2>
+  <div class="divider fade-up"></div>
+  <p class="fade-up" style="max-width: 52ch; font-size: 0.95rem; color: var(--ink-light); line-height: 1.8;">
+    People do their best work when they feel seen, supported, and still held to a standard. I lead with kindness and firmness. The best teams need both: care and accountability.
+  </p>
+
+  <div class="approach-grid fade-up">
+    <div>
+      <div class="approach-item">
+        <div class="approach-icon">01</div>
+        <div class="approach-head">Observation before intervention</div>
+        <div class="approach-body">In high-volume service environments, I watch the small things — because they usually become the big things. Are customers calling back? Are agents guessing? Are leads coaching or just putting out fires?</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-icon">02</div>
+        <div class="approach-head">Diagnose before fixing</div>
+        <div class="approach-body">If one person is struggling, we coach the person. If five people are struggling with the same thing, we fix the system. The wrong diagnosis creates the wrong solution.</div>
+      </div>
+    </div>
+    <div>
+      <div class="approach-item">
+        <div class="approach-icon">03</div>
+        <div class="approach-head">Empathy meets structure</div>
+        <div class="approach-body">My background in hospitality taught me tone, urgency, and what people are not saying. My paralegal training taught me to separate emotion from evidence and think through problems with structure.</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-icon">04</div>
+        <div class="approach-head">Speed without care creates repeat work</div>
+        <div class="approach-body">The goal is not just for the customer to leave satisfied — it is for them to leave feeling safe, guided, and confident that the right people have them.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW I THINK -->
+<section class="section" id="thinking">
+  <div class="section-label fade-up">Situational Thinking</div>
+  <h2 class="section-heading fade-up">How I think in practice</h2>
+  <div class="divider fade-up"></div>
+  <p class="fade-up" style="max-width: 52ch; font-size: 0.95rem; color: var(--ink-light);">
+    Click any scenario to see how I approach it.
+  </p>
+
+  <div class="think-grid fade-up" id="thinkGrid">
+    <div class="think-card" onclick="toggleCard(this)">
+      <div class="think-card-head">
+        <span class="think-number">01</span>
+        <span class="think-title">When volume is rising</span>
+        <span class="think-toggle">+</span>
+      </div>
+      <div class="think-body">I look at call queues, email volume, ticket trends, response times, staffing coverage, and repeat contacts. High volume does not always mean "work harder." Sometimes it means the workflow, routing, ownership, or coverage model needs to be fixed.</div>
+    </div>
+    <div class="think-card" onclick="toggleCard(this)">
+      <div class="think-card-head">
+        <span class="think-number">02</span>
+        <span class="think-title">When performance drops</span>
+        <span class="think-toggle">+</span>
+      </div>
+      <div class="think-body">I look for patterns before blame. Is it coaching? Training? Tools? Motivation? Capacity? Unclear expectations? The answer matters because the wrong diagnosis creates the wrong solution.</div>
+    </div>
+    <div class="think-card" onclick="toggleCard(this)">
+      <div class="think-card-head">
+        <span class="think-number">03</span>
+        <span class="think-title">When customers are frustrated</span>
+        <span class="think-toggle">+</span>
+      </div>
+      <div class="think-body">I focus on ownership, next steps, tone, and follow-through. People calm down faster when they feel someone capable has taken the wheel.</div>
+    </div>
+    <div class="think-card" onclick="toggleCard(this)">
+      <div class="think-card-head">
+        <span class="think-number">04</span>
+        <span class="think-title">When Team Leads need support</span>
+        <span class="think-toggle">+</span>
+      </div>
+      <div class="think-body">I help leaders move from reacting to leading. That means clearer expectations, better coaching habits, stronger documentation, and more confidence in difficult conversations.</div>
+    </div>
+    <div class="think-card" onclick="toggleCard(this)">
+      <div class="think-card-head">
+        <span class="think-number">05</span>
+        <span class="think-title">When capacity needs planning</span>
+        <span class="think-toggle">+</span>
+      </div>
+      <div class="think-body">I look at volume trends, forecasts, coverage gaps, team availability, and hiring needs early. The goal is to stay ahead of demand before the team is overwhelmed and the customer experience starts slipping.</div>
+    </div>
+    <div class="think-card" onclick="toggleCard(this)">
+      <div class="think-card-head">
+        <span class="think-number">06</span>
+        <span class="think-title">When Sales Ops needs alignment</span>
+        <span class="think-toggle">+</span>
+      </div>
+      <div class="think-body">I connect strategy to daily execution. A strong plan only works when the team understands the goal, the workflow supports it, and the metrics show whether it is actually being met.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section tools-section" id="tools">
+  <div class="section-label fade-up">Technical Fluency</div>
+  <h2 class="section-heading fade-up">Tools I work with</h2>
+  <div class="divider fade-up"></div>
+  <p class="fade-up" style="max-width: 52ch; font-size: 0.9rem; color: var(--ink-light); margin-bottom: 2.5rem;">
+    I use tools to make work visible — not just to track activity. The goal is better coaching, cleaner handoffs, faster decisions.
+  </p>
+
+  <div class="fade-up">
+    <div class="tools-category">
+      <div class="tools-cat-label">Customer Support & CRM</div>
+      <div class="tool-pills">
+        <span class="tool-pill">Zendesk</span>
+        <span class="tool-pill">Salesforce</span>
+        <span class="tool-pill">Freshservice</span>
+        <span class="tool-pill">HubSpot</span>
+      </div>
+    </div>
+    <div class="tools-category">
+      <div class="tools-cat-label">Call Center & Communication</div>
+      <div class="tool-pills">
+        <span class="tool-pill">Avaya</span>
+        <span class="tool-pill">Call Monitoring</span>
+        <span class="tool-pill">Email Queue Management</span>
+        <span class="tool-pill">Escalation Tracking</span>
+      </div>
+    </div>
+    <div class="tools-category">
+      <div class="tools-cat-label">Operations & Reporting</div>
+      <div class="tool-pills">
+        <span class="tool-pill">Microsoft Dynamics 365 BC</span>
+        <span class="tool-pill">Power BI</span>
+        <span class="tool-pill">Tableau</span>
+        <span class="tool-pill">Excel</span>
+        <span class="tool-pill">Airtable</span>
+      </div>
+    </div>
+    <div class="tools-category">
+      <div class="tools-cat-label">Workflow & Team Management</div>
+      <div class="tool-pills">
+        <span class="tool-pill">Jira</span>
+        <span class="tool-pill">Asana</span>
+        <span class="tool-pill">Trello</span>
+        <span class="tool-pill">Google Workspace</span>
+        <span class="tool-pill">Microsoft Teams</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF POINTS -->
+<section class="section" id="proof">
+  <div class="section-label fade-up">Proof Points</div>
+  <h2 class="section-heading fade-up">Where the work happened</h2>
+  <div class="divider fade-up"></div>
+
+  <div class="proof-grid">
+    <div class="proof-card fade-up">
+      <div class="proof-org">Majorel</div>
+      <p class="proof-text">Supervised 50+ agents per shift in a high-volume call center environment, improving team-wide service performance through stronger coaching routines, queue monitoring, escalation tracking, and SLA management.</p>
+      <span class="proof-stat">+18%</span>
+      <span class="proof-stat-label">Service performance improvement</span>
+    </div>
+    <div class="proof-card fade-up">
+      <div class="proof-org">CAA Insurance</div>
+      <p class="proof-text">Managed 100+ active auto claims monthly while handling high-volume customer calls in a regulated insurance environment. Improved documentation, next-step communication, and customer follow-through.</p>
+      <span class="proof-stat">−15%</span>
+      <span class="proof-stat-label">Reduction in repeat follow-ups</span>
+    </div>
+    <div class="proof-card fade-up">
+      <div class="proof-org">BRODA Seating</div>
+      <p class="proof-text">Led Sales Operations and customer success enablement, improving service workflows, follow-up discipline, ticket visibility, and customer communication across customer-facing operations.</p>
+      <span class="proof-stat">−20%</span>
+      <span class="proof-stat-label">Reduction in recurring workflow gaps</span>
+    </div>
+    <div class="proof-card fade-up">
+      <div class="proof-org">TikTok / ByteDance</div>
+      <p class="proof-text">Coached and supported content moderation teams reviewing thousands of videos in high-volume queues. Partnered with Workforce Management to maintain coverage, monitor queue health, and support real-time performance.</p>
+      <span class="proof-stat">−15%</span>
+      <span class="proof-stat-label">Latency reduction in queue processing</span>
+    </div>
+    <div class="proof-card fade-up">
+      <div class="proof-org">Ontario Ministry of Health</div>
+      <p class="proof-text">Led high-volume COVID-19 contact center operations during peak public demand, managing 300+ vaccine-related inquiries daily and helping callers navigate vaccine access during one of Ontario's highest-pressure service periods.</p>
+      <span class="proof-stat">300+</span>
+      <span class="proof-stat-label">Daily inquiries managed at peak</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I BRING -->
+<section class="section bg-cream">
+  <div class="section-label fade-up">Value Proposition</div>
+  <h2 class="section-heading fade-up">What I would bring</h2>
+  <div class="divider fade-up"></div>
+  <div class="bring-list fade-up">
+    <div class="bring-item">
+      <span class="bring-marker">→</span>
+      <span class="bring-text">A calm head in high-volume environments.</span>
+    </div>
+    <div class="bring-item">
+      <span class="bring-marker">→</span>
+      <span class="bring-text">A leader who pays attention to people and patterns.</span>
+    </div>
+    <div class="bring-item">
+      <span class="bring-marker">→</span>
+      <span class="bring-text">A customer-first mindset that does not ignore the numbers.</span>
+    </div>
+    <div class="bring-item">
+      <span class="bring-marker">→</span>
+      <span class="bring-text">A Sales Operations lens that connects strategy to daily execution.</span>
+    </div>
+    <div class="bring-item">
+      <span class="bring-marker">→</span>
+      <span class="bring-text">A coaching style rooted in empathy, honesty, and standards.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING / CONTACT -->
+<section class="closing-section" id="contact">
+  <div class="fade-up">
+    <h2 class="closing-heading">Let's<br><em>talk.</em></h2>
+    <div class="divider" style="margin-top: 2rem;"></div>
+    <p style="font-size: 0.9rem; color: var(--ink-light); max-width: 38ch; line-height: 1.8;">
+      If you are building or strengthening a customer operations team and need a leader who has done the work — reach out.
+    </p>
+  </div>
+  <div class="fade-up">
+    <div class="contact-detail">
+      <div class="contact-label">Role focus</div>
+      <div class="contact-value">Customer Operations Leadership</div>
+    </div>
+    <div class="contact-detail" style="margin-top: 1.5rem;">
+      <div class="contact-label">Background</div>
+      <div class="contact-value">Business · Hospitality · Paralegal Studies</div>
+    </div>
+    <div class="contact-detail" style="margin-top: 1.5rem;">
+      <div class="contact-label">Experience across</div>
+      <div class="contact-value">Insurance · Public Health · Tech · Sales Operations</div>
+    </div>
+    <div style="margin-top: 2.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <a href="mailto:" class="btn-primary" style="background: var(--ink); color: #FAF8F4;">Send a message</a>
+      <a href="#" class="btn-ghost" style="color: var(--ink); border-color: var(--rule);">Download resume</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Rachel Wealth</span>
+  <span class="footer-note">Customer Operations Leadership Portfolio</span>
+</footer>
+
+<script>
+  function toggleCard(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.think-card').forEach(c => c.classList.remove('open'));
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const siblings = Array.from(el.parentElement.querySelectorAll('.fade-up'));
+        const delay = siblings.indexOf(el) * 80;
+        setTimeout(() => el.classList.add('visible'), delay);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
